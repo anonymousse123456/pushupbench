@@ -3,24 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+        content="PushupBench: A benchmark for evaluating repetition counting in Vision-Language Models. VLMs can describe what happens but fail to count how many times.">
+  <meta name="keywords" content="PushupBench, VLM, Vision Language Model, Repetition Counting, Video Understanding, Temporal Reasoning">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nerfies: Deformable Neural Radiance Fields</title>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+  <title>PushupBench: Your VLM is Not Good at Counting Pushups</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -32,95 +18,116 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+  <style>
+    .hero-body-custom {
+      padding-top: 3rem;
+      padding-bottom: 1rem;
+    }
+    .key-stat {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .key-stat .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #3273dc;
+    }
+    .key-stat .stat-label {
+      font-size: 1rem;
+      color: #666;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      margin: 2rem 0;
+    }
+    .highlight-box h3 {
+      color: white;
+    }
+    .result-table {
+      font-size: 0.9rem;
+    }
+    .result-table th {
+      background-color: #f5f5f5;
+    }
+    .best-result {
+      font-weight: bold;
+      color: #00d1b2;
+    }
+    .negative-result {
+      color: #ff3860;
+    }
+    .teaser-text {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .finding-card {
+      background: #f8f9fa;
+      border-left: 4px solid #3273dc;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .tldr-box {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .section-divider {
+      border-top: 2px solid #eee;
+      margin: 3rem 0;
+    }
+  </style>
 </head>
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav>
-
-
 <section class="hero">
-  <div class="hero-body">
+  <div class="hero-body hero-body-custom">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Nerfies: Deformable Neural Radiance Fields</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://keunhong.com">Keunhong Park</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
-            </span>
+          <h1 class="title is-1 publication-title">
+            Your VLM is Not Good at Counting Pushups
+          </h1>
+          <h2 class="subtitle is-4" style="margin-top: 1rem; color: #666;">
+            Introducing <strong>PushupBench</strong>: A Benchmark for Temporal Reasoning in Vision-Language Models
+          </h2>
+
+          <div class="is-size-5 publication-authors" style="margin-top: 1.5rem;">
+            <span class="author-block">Anonymous Authors</span>
           </div>
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of Washington,</span>
-            <span class="author-block"><sup>2</sup>Google Research</span>
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">Under Review at ACL 2025</span>
           </div>
 
-          <div class="column has-text-centered">
+          <div class="column has-text-centered" style="margin-top: 1.5rem;">
             <div class="publication-links">
-              <!-- PDF Link. -->
+              <!-- PDF Link -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -128,8 +135,9 @@
                   <span>Paper</span>
                 </a>
               </span>
+              <!-- arXiv Link -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2011.12948"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -137,37 +145,27 @@
                   <span>arXiv</span>
                 </a>
               </span>
-              <!-- Video Link. -->
+              <!-- Code Link -->
               <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
                   <span>Code</span>
-                  </a>
+                </a>
               </span>
-              <!-- Dataset Link. -->
+              <!-- Dataset Link -->
               <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
-                  <span>Data</span>
-                  </a>
+                  <span>Dataset</span>
+                </a>
+              </span>
             </div>
-
           </div>
         </div>
       </div>
@@ -175,280 +173,471 @@
   </div>
 </section>
 
-<section class="hero teaser">
+<!-- TL;DR Section -->
+<section class="section" style="padding-top: 1rem;">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4"
-                type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
-      </h2>
+    <div class="tldr-box">
+      <h3 class="title is-5" style="margin-bottom: 0.5rem;">
+        <i class="fas fa-bolt"></i> TL;DR
+      </h3>
+      <p class="teaser-text">
+        Large vision-language models can recognize <em>what</em> happens in video but fail to count <em>how many</em> times.
+        The best frontier model achieves only <strong>42.1%</strong> exact accuracy on counting repetitions.
+        Open-source 4B models score <strong>~6%</strong>, matching a constant predictor.
+        Fine-tuning on counting transfers to general video understanding.
+      </p>
     </div>
   </div>
 </section>
 
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
+<!-- Key Statistics -->
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-3 key-stat">
+        <div class="stat-number">446</div>
+        <div class="stat-label">Video Clips</div>
+      </div>
+      <div class="column is-3 key-stat">
+        <div class="stat-number">36.7s</div>
+        <div class="stat-label">Avg. Duration</div>
+      </div>
+      <div class="column is-3 key-stat">
+        <div class="stat-number">375</div>
+        <div class="stat-label">Unique Exercises</div>
+      </div>
+      <div class="column is-3 key-stat">
+        <div class="stat-number">11</div>
+        <div class="stat-label">Content Creators</div>
       </div>
     </div>
   </div>
 </section>
 
-
+<!-- Abstract -->
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
+            Large vision-language models (VLMs) have achieved remarkable progress in semantic video understanding&mdash;correctly identifying that a video shows "a person doing squats." Yet when asked <em>how many</em> squats were performed, even frontier models like Gemini 3 Flash struggle, achieving only 42.1% exact accuracy on our benchmark.
           </p>
           <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
+            We introduce <strong>PushupBench</strong>, 446 long-form clips (avg. 36.7s) for evaluating repetition counting. The best frontier model achieves 42.1% exact accuracy; open-source 4B models score ~6%, matching supervised baselines. We show that accuracy alone misleads&mdash;weaker models exploit the modal count rather than reason temporally.
           </p>
           <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
+            Fine-tuning on counting with 1k samples transfers to general video understanding: <strong>MVBench (+2.15)</strong>, <strong>PerceptionTest (+1.88)</strong>, <strong>TVBench (+4.54)</strong>, suggesting counting is a proxy for broader temporal reasoning.
           </p>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
-
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    <!--/ Paper video. -->
   </div>
 </section>
 
+<div class="section-divider"></div>
 
+<!-- The Core Problem -->
 <section class="section">
   <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">The Problem: Counting Reveals Temporal Blindness</h2>
 
     <div class="columns is-centered">
-
-      <!-- Visual Effects. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-      <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <!--/ Matting. -->
-
-    <!-- Animation. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
-
-        <!-- Interpolating. -->
-        <h3 class="title is-4">Interpolating states</h3>
+      <div class="column is-10">
         <div class="content has-text-justified">
           <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
+            Unlike action recognition, which can often be solved from a single frame, <strong>repetition counting</strong> requires:
           </p>
-        </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
-          </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
-            </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
-          </div>
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
-          </div>
-        </div>
-        <br/>
-        <!--/ Interpolating. -->
-
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
+          <ul>
+            <li>Tracking state changes across time</li>
+            <li>Detecting action boundaries</li>
+            <li>Maintaining a coherent count despite variable speeds, camera motion, and appearance changes</li>
+          </ul>
           <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <!--/ Re-rendering. -->
-
-      </div>
-    </div>
-    <!--/ Animation. -->
-
-
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
+            This makes counting an ideal diagnostic probe for temporal reasoning capabilities.
           </p>
         </div>
       </div>
     </div>
-    <!--/ Concurrent Work. -->
 
+    <!-- Key Finding: Scatter Plots -->
+    <div class="columns is-centered" style="margin-top: 2rem;">
+      <div class="column is-10">
+        <h3 class="title is-4 has-text-centered">R<sup>2</sup> Reveals What Accuracy Hides</h3>
+        <figure class="image">
+          <img src="./static/images/correlation_scatter_2x2_clean.png" alt="Scatter plots showing predicted vs ground truth repetition counts for four models">
+        </figure>
+        <p class="has-text-centered" style="margin-top: 1rem; color: #666;">
+          <strong>Figure:</strong> Predicted vs. ground truth repetition counts. Diagonal = perfect prediction.
+          Gemini 3 Flash shows strong fit (R<sup>2</sup>=0.82); base Qwen3-VL-4B collapses to constant predictions (R<sup>2</sup>=-0.34).
+        </p>
+      </div>
+    </div>
+
+    <div class="finding-card" style="margin-top: 2rem;">
+      <h4 class="title is-5">Key Insight</h4>
+      <p>
+        <strong>8% exact match can be achieved by always predicting "10"</strong>&mdash;the modal count in fitness data.
+        R<sup>2</sup> distinguishes models that actually count from those that exploit dataset statistics.
+        A model with higher exact match but negative R<sup>2</sup> is <em>not</em> counting.
+      </p>
+    </div>
   </div>
 </section>
 
+<div class="section-divider"></div>
 
+<!-- Main Results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Benchmark Results</h2>
+
+    <div class="columns is-centered">
+      <div class="column is-11">
+        <div class="table-container">
+          <table class="table is-striped is-hoverable is-fullwidth result-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Exact %</th>
+                <th>MAE</th>
+                <th>R<sup>2</sup></th>
+                <th></th>
+                <th>Model</th>
+                <th>Exact %</th>
+                <th>MAE</th>
+                <th>R<sup>2</sup></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="4"><em>Commercial VLMs (Gemini @ 5fps)</em></td>
+                <td></td>
+                <td colspan="4"><em>Open-Source VLMs (Qwen3-VL @ 5fps)</em></td>
+              </tr>
+              <tr>
+                <td>Gemini 3 Flash</td>
+                <td class="best-result">42.1</td>
+                <td class="best-result">2.9</td>
+                <td class="best-result">0.82</td>
+                <td></td>
+                <td>Qwen3-VL-4B-Instruct</td>
+                <td>8.9</td>
+                <td>8.2</td>
+                <td class="negative-result">-0.21</td>
+              </tr>
+              <tr>
+                <td>Gemini 3 Pro</td>
+                <td>39.8</td>
+                <td>3.6</td>
+                <td>0.70</td>
+                <td></td>
+                <td>Qwen3-VL-4B-Thinking</td>
+                <td>8.2</td>
+                <td>8.9</td>
+                <td class="negative-result">-0.34</td>
+              </tr>
+              <tr>
+                <td>Gemini 2.5 Pro</td>
+                <td>29.9</td>
+                <td>5.7</td>
+                <td>0.63</td>
+                <td></td>
+                <td><strong>+ DAPO (Ours)</strong></td>
+                <td>5.9</td>
+                <td>7.2</td>
+                <td>0.23</td>
+              </tr>
+              <tr>
+                <td>Gemini 2.5 Flash</td>
+                <td>10.9</td>
+                <td>7.7</td>
+                <td>0.49</td>
+                <td></td>
+                <td>Qwen3-VL-8B-Instruct</td>
+                <td>7.2</td>
+                <td>7.9</td>
+                <td class="negative-result">-0.11</td>
+              </tr>
+              <tr>
+                <td>Gemini 2.0 Flash</td>
+                <td>8.9</td>
+                <td>7.8</td>
+                <td>0.25</td>
+                <td></td>
+                <td>Qwen3-VL-32B-Instruct</td>
+                <td>11.8</td>
+                <td>7.7</td>
+                <td>0.36</td>
+              </tr>
+              <tr>
+                <td colspan="4"><em>Commercial VLMs (Other)</em></td>
+                <td></td>
+                <td colspan="4"><em>Baselines</em></td>
+              </tr>
+              <tr>
+                <td>GPT-5</td>
+                <td>10.9</td>
+                <td>7.6</td>
+                <td>0.01</td>
+                <td></td>
+                <td>TransRAC (supervised)</td>
+                <td>6.7</td>
+                <td>9.1</td>
+                <td class="negative-result">-0.18</td>
+              </tr>
+              <tr>
+                <td>Claude Sonnet 4.5</td>
+                <td>9.5</td>
+                <td>9.0</td>
+                <td>0.00</td>
+                <td></td>
+                <td>Const. (mode=10)</td>
+                <td>9.9</td>
+                <td>8.5</td>
+                <td class="negative-result">-0.21</td>
+              </tr>
+              <tr>
+                <td>Claude Opus 4.5</td>
+                <td>4.9</td>
+                <td>9.7</td>
+                <td>0.09</td>
+                <td></td>
+                <td>Const. (mean=17)</td>
+                <td>2.9</td>
+                <td>9.2</td>
+                <td>0.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="has-text-centered" style="color: #666; margin-top: 1rem;">
+          R<sup>2</sup> measures variance explained beyond mean baseline. <span class="negative-result">Negative values</span> indicate constant or random output.
+          <span class="best-result">Green</span> indicates best performance.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Why Constant Prediction Works -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Why Does Predicting "10" Work?</h2>
+
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <figure class="image">
+          <img src="./static/images/gt_distribution.png" alt="Ground truth distribution showing mode at 10">
+        </figure>
+        <p class="has-text-centered" style="margin-top: 1rem; color: #666;">
+          <strong>Figure:</strong> Ground truth distribution in training data (left) and PushupBench (right).
+          Both share mode=10, reflecting human preference for 10-rep workout sets.
+        </p>
+      </div>
+    </div>
+
+    <div class="finding-card">
+      <p>
+        People commonly perform exercises in sets of 10 reps. Models that collapse to always predicting "10" achieve ~10% exact match <em>without any temporal reasoning</em>.
+        This is why R<sup>2</sup> is essential: it penalizes this behavior while exact match rewards it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Transfer Learning -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Counting Transfers to General Video Understanding</h2>
+
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <p class="content has-text-justified">
+          A key finding is that training on repetition counting transfers to general video understanding tasks.
+          Fine-tuning Qwen3-VL-4B-Thinking on just 968 counting samples improves performance across four unrelated benchmarks:
+        </p>
+
+        <div class="table-container">
+          <table class="table is-striped is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>MotionBench</th>
+                <th>PerceptionTest</th>
+                <th>MVBench</th>
+                <th>TVBench</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Base</td>
+                <td>58.2</td>
+                <td>72.57</td>
+                <td>65.75</td>
+                <td>52.96</td>
+              </tr>
+              <tr>
+                <td>+ DAPO (Ours)</td>
+                <td><strong>58.7</strong></td>
+                <td><strong>74.45</strong></td>
+                <td><strong>67.90</strong></td>
+                <td><strong>57.50</strong></td>
+              </tr>
+              <tr style="background-color: #e8f5e9;">
+                <td><strong>&Delta;</strong></td>
+                <td><strong>+0.5</strong></td>
+                <td><strong>+1.88</strong></td>
+                <td><strong>+2.15</strong></td>
+                <td><strong>+4.54</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="finding-card">
+          <h4 class="title is-5">Where Does It Help Most?</h4>
+          <p>
+            Category-level analysis reveals improvements concentrate in tasks requiring temporal state tracking:
+          </p>
+          <ul>
+            <li><strong>MVBench:</strong> moving_count (+8.5), counterfactual_inference (+12.5), scene_transition (+6.0)</li>
+            <li><strong>TVBench:</strong> action_sequence (+9.2), action_localization (+5.6), moving_direction (+40.0)</li>
+          </ul>
+          <p>These categories share a common requirement: detecting <em>when</em> events occur, not just <em>what</em> happens.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Dataset Diversity -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Dataset Diversity</h2>
+
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <figure class="image">
+          <img src="./static/images/exercise_diversity.png" alt="Exercise type diversity in PushupBench">
+        </figure>
+        <p class="has-text-centered" style="margin-top: 1rem; color: #666;">
+          <strong>Figure:</strong> PushupBench spans 375 unique exercise types across 446 clips (84% uniqueness),
+          ensuring evaluation of generalization rather than memorization.
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered" style="margin-top: 2rem;">
+      <div class="column is-8">
+        <h3 class="title is-4 has-text-centered">Content Creator Diversity</h3>
+        <div class="table-container">
+          <table class="table is-striped is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Creator</th>
+                <th>Country</th>
+                <th>Gender</th>
+                <th># Videos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Pamela Reif</td><td>Germany</td><td>F</td><td>6</td></tr>
+              <tr><td>Chloe Ting</td><td>Australia</td><td>F</td><td>1</td></tr>
+              <tr><td>Caroline Girvan</td><td>N. Ireland</td><td>F</td><td>1</td></tr>
+              <tr><td>Growingannanas</td><td>Austria</td><td>F</td><td>1</td></tr>
+              <tr><td>Eylem Abaci</td><td>Germany</td><td>F</td><td>8</td></tr>
+              <tr><td>Chris Heria</td><td>USA</td><td>M</td><td>1</td></tr>
+              <tr><td>MIZI</td><td>Korea/Malaysia</td><td>F</td><td>1</td></tr>
+              <tr><td>Toned w/ Alexandra</td><td>Sweden/Spain</td><td>F</td><td>9</td></tr>
+              <tr><td>Shirlyn Kim</td><td>South Korea</td><td>F</td><td>2</td></tr>
+              <tr><td>Lucy Wyndham-Read</td><td>UK</td><td>F</td><td>1</td></tr>
+              <tr><td>Oliver Sjostrom</td><td>Sweden</td><td>M</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="has-text-centered" style="color: #666;">
+          11 creators across 10 countries ensure broad representation across gender, geography, and presentation style.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Reward Hacking -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Challenges: Reward Hacking in RL Training</h2>
+
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <p class="content has-text-justified">
+          During RL fine-tuning, we identified multiple reward hacking patterns that models exploit instead of learning to count:
+        </p>
+
+        <div class="columns">
+          <div class="column">
+            <div class="finding-card">
+              <h4 class="title is-5">Mode Collapse</h4>
+              <p>Always predicting "10" yields non-zero expected reward without any counting.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="finding-card">
+              <h4 class="title is-5">Frame Count Exploitation</h4>
+              <p>Models learn to output half the frame count rather than counting repetitions.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="finding-card">
+              <h4 class="title is-5">On-Screen Text</h4>
+              <p>VLMs read on-screen counters and timers rather than counting motion.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns is-centered" style="margin-top: 1.5rem;">
+          <div class="column is-4 has-text-centered">
+            <figure class="image">
+              <img src="./static/images/beforeremoval.png" alt="Frame with on-screen counter">
+            </figure>
+            <p style="color: #666; margin-top: 0.5rem;">Before: Counter "03" visible</p>
+          </div>
+          <div class="column is-4 has-text-centered">
+            <figure class="image">
+              <img src="./static/images/afterremoval.png" alt="Frame with counter removed">
+            </figure>
+            <p style="color: #666; margin-top: 0.5rem;">After: Counter removed</p>
+          </div>
+        </div>
+        <p class="has-text-centered" style="color: #666;">
+          We manually edited out on-screen counters from benchmark videos to ensure evaluation measures genuine counting ability.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BibTeX -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <pre><code>@inproceedings{anonymous2025pushupbench,
+  title     = {Your VLM is Not Good at Counting Pushups},
+  author    = {Anonymous},
+  booktitle = {ACL},
+  year      = {2025},
 }</code></pre>
   </div>
 </section>
@@ -456,15 +645,6 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
@@ -474,11 +654,7 @@
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
           <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
+            Website template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
           </p>
         </div>
       </div>
