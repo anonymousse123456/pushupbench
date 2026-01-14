@@ -99,6 +99,153 @@
       border-top: 2px solid #eee;
       margin: 3rem 0;
     }
+
+    /* Interactive Demo Styles */
+    .demo-container {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    .demo-video-wrapper {
+      position: relative;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+    }
+    .demo-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .demo-video-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(45deg, #2d2d2d 25%, #3d3d3d 50%, #2d2d2d 75%);
+      background-size: 20px 20px;
+      color: #888;
+      font-size: 1.2rem;
+    }
+    .demo-info {
+      color: white;
+      padding: 1.5rem 0;
+    }
+    .demo-exercise-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .demo-ground-truth {
+      display: inline-block;
+      background: #00d1b2;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .predictions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .prediction-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .prediction-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.15);
+    }
+    .prediction-card.correct {
+      border: 2px solid #00d1b2;
+      background: rgba(0, 209, 178, 0.15);
+    }
+    .prediction-card.close {
+      border: 2px solid #ffdd57;
+      background: rgba(255, 221, 87, 0.1);
+    }
+    .prediction-card.wrong {
+      border: 2px solid #ff3860;
+      background: rgba(255, 56, 96, 0.1);
+    }
+    .prediction-model {
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-bottom: 0.5rem;
+    }
+    .prediction-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .prediction-card.correct .prediction-value {
+      color: #00d1b2;
+    }
+    .prediction-card.close .prediction-value {
+      color: #ffdd57;
+    }
+    .prediction-card.wrong .prediction-value {
+      color: #ff3860;
+    }
+    .prediction-diff {
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+    }
+    .demo-selector {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .demo-btn {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid transparent;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+    .demo-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .demo-btn.active {
+      background: #3273dc;
+      border-color: #3273dc;
+    }
+    .demo-legend {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .legend-dot.correct { background: #00d1b2; }
+    .legend-dot.close { background: #ffdd57; }
+    .legend-dot.wrong { background: #ff3860; }
   </style>
 </head>
 <body>
@@ -213,6 +360,73 @@
     </div>
   </div>
 </section>
+
+<!-- Interactive Demo Section -->
+<section class="section" style="background: #f8f9fa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">See VLMs Fail in Real-Time</h2>
+    <p class="has-text-centered" style="margin-bottom: 2rem; color: #666;">
+      Watch exercise clips from our benchmark and compare what different models predicted vs. ground truth.
+    </p>
+
+    <div class="demo-container">
+      <!-- Video Selector Buttons -->
+      <div class="demo-selector" id="demo-selector">
+        <button class="demo-btn active" data-demo="0">Jumping Jacks</button>
+        <button class="demo-btn" data-demo="1">Mountain Climbers</button>
+        <button class="demo-btn" data-demo="2">Squats</button>
+        <button class="demo-btn" data-demo="3">Bicycle Crunches</button>
+      </div>
+
+      <div class="columns">
+        <!-- Video Player Column -->
+        <div class="column is-7">
+          <div class="demo-video-wrapper">
+            <!-- Placeholder - will be replaced with actual video -->
+            <div class="demo-video-placeholder" id="demo-video-container">
+              <div style="text-align: center;">
+                <i class="fas fa-video" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <br>
+                Video placeholder<br>
+                <span style="font-size: 0.9rem;">(MP4 coming soon)</span>
+              </div>
+            </div>
+          </div>
+          <div class="demo-info">
+            <div class="demo-exercise-name" id="demo-exercise-name">Jumping Jacks</div>
+            <span class="demo-ground-truth">Ground Truth: <span id="demo-gt">35</span> reps</span>
+          </div>
+        </div>
+
+        <!-- Predictions Column -->
+        <div class="column is-5">
+          <div style="color: #fff; font-size: 1.1rem; margin-bottom: 1rem; font-weight: 500;">
+            <i class="fas fa-robot"></i> Model Predictions
+          </div>
+          <div class="predictions-grid" id="predictions-grid">
+            <!-- Predictions will be populated by JS -->
+          </div>
+          <div class="demo-legend">
+            <div class="legend-item">
+              <div class="legend-dot correct"></div>
+              <span>Exact match</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot close"></div>
+              <span>Off by 1-2</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot wrong"></div>
+              <span>Off by 3+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
 
 <!-- Abstract -->
 <section class="section">
@@ -661,6 +875,151 @@
     </div>
   </div>
 </footer>
+
+<!-- Interactive Demo JavaScript -->
+<script>
+  // Demo data - replace video paths when MP4s are available
+  const demoData = [
+    {
+      id: 0,
+      name: "Jumping Jacks",
+      video: "./static/videos/demo_jumping_jacks.mp4", // Placeholder path
+      groundTruth: 35,
+      predictions: {
+        "Gemini 3 Flash": 34,
+        "Gemini 2.5 Pro": 31,
+        "GPT-5": 10,
+        "Claude Sonnet 4.5": 12,
+        "Qwen3-VL-4B": 10,
+        "Qwen3-VL-32B": 15
+      }
+    },
+    {
+      id: 1,
+      name: "Mountain Climbers",
+      video: "./static/videos/demo_mountain_climbers.mp4", // Placeholder path
+      groundTruth: 28,
+      predictions: {
+        "Gemini 3 Flash": 27,
+        "Gemini 2.5 Pro": 24,
+        "GPT-5": 10,
+        "Claude Sonnet 4.5": 10,
+        "Qwen3-VL-4B": 10,
+        "Qwen3-VL-32B": 18
+      }
+    },
+    {
+      id: 2,
+      name: "Squats",
+      video: "./static/videos/demo_squats.mp4", // Placeholder path
+      groundTruth: 15,
+      predictions: {
+        "Gemini 3 Flash": 15,
+        "Gemini 2.5 Pro": 14,
+        "GPT-5": 12,
+        "Claude Sonnet 4.5": 10,
+        "Qwen3-VL-4B": 10,
+        "Qwen3-VL-32B": 12
+      }
+    },
+    {
+      id: 3,
+      name: "Bicycle Crunches",
+      video: "./static/videos/demo_bicycle_crunches.mp4", // Placeholder path
+      groundTruth: 24,
+      predictions: {
+        "Gemini 3 Flash": 23,
+        "Gemini 2.5 Pro": 20,
+        "GPT-5": 10,
+        "Claude Sonnet 4.5": 8,
+        "Qwen3-VL-4B": 10,
+        "Qwen3-VL-32B": 10
+      }
+    }
+  ];
+
+  function getAccuracyClass(prediction, groundTruth) {
+    const diff = Math.abs(prediction - groundTruth);
+    if (diff === 0) return 'correct';
+    if (diff <= 2) return 'close';
+    return 'wrong';
+  }
+
+  function getDiffText(prediction, groundTruth) {
+    const diff = prediction - groundTruth;
+    if (diff === 0) return 'Exact!';
+    if (diff > 0) return `+${diff}`;
+    return `${diff}`;
+  }
+
+  function renderPredictions(demo) {
+    const grid = document.getElementById('predictions-grid');
+    grid.innerHTML = '';
+
+    for (const [model, prediction] of Object.entries(demo.predictions)) {
+      const accuracyClass = getAccuracyClass(prediction, demo.groundTruth);
+      const diffText = getDiffText(prediction, demo.groundTruth);
+
+      const card = document.createElement('div');
+      card.className = `prediction-card ${accuracyClass}`;
+      card.innerHTML = `
+        <div class="prediction-model">${model}</div>
+        <div class="prediction-value">${prediction}</div>
+        <div class="prediction-diff">${diffText}</div>
+      `;
+      grid.appendChild(card);
+    }
+  }
+
+  function updateDemo(demoIndex) {
+    const demo = demoData[demoIndex];
+
+    // Update exercise name and ground truth
+    document.getElementById('demo-exercise-name').textContent = demo.name;
+    document.getElementById('demo-gt').textContent = demo.groundTruth;
+
+    // Update video (when available, uncomment and modify)
+    const videoContainer = document.getElementById('demo-video-container');
+    // When you have MP4 files, replace the placeholder with:
+    // videoContainer.innerHTML = `
+    //   <video class="demo-video" controls autoplay muted loop>
+    //     <source src="${demo.video}" type="video/mp4">
+    //   </video>
+    // `;
+
+    // For now, update placeholder text
+    videoContainer.innerHTML = `
+      <div style="text-align: center;">
+        <i class="fas fa-video" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+        <br>
+        ${demo.name}<br>
+        <span style="font-size: 0.9rem;">(MP4 coming soon)</span>
+      </div>
+    `;
+
+    // Update predictions
+    renderPredictions(demo);
+
+    // Update active button
+    document.querySelectorAll('.demo-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', i === demoIndex);
+    });
+  }
+
+  // Initialize demo on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initial render
+    updateDemo(0);
+
+    // Add click handlers to demo buttons
+    document.querySelectorAll('.demo-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const demoIndex = parseInt(this.getAttribute('data-demo'));
+        updateDemo(demoIndex);
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
