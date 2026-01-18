@@ -388,19 +388,22 @@
       <div class="demo-video-col">
         <div class="demo-video-wrapper">
           <div class="demo-video-placeholder" id="demo-video-container">
-            <i class="fas fa-play-circle" style="font-size: 2.5rem;"></i>
+            <video class="demo-video" id="demo-video" controls muted loop autoplay playsinline>
+              <source src="./static/videos/alternating_side_crunch.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
           </div>
           <!-- Timestamp Navigation Overlay -->
           <div class="timestamp-bar" id="timestamp-bar">
-            <span class="timestamp-chip active" data-ts="0">0:15 Jumping Jacks</span>
-            <span class="timestamp-chip" data-ts="1">0:45 Mountain Climbers</span>
-            <span class="timestamp-chip" data-ts="2">1:15 Squats</span>
-            <span class="timestamp-chip" data-ts="3">1:45 Bicycle Crunches</span>
+            <span class="timestamp-chip active" data-ts="0">Side Crunch</span>
+            <span class="timestamp-chip" data-ts="1">Knee Tap</span>
+            <span class="timestamp-chip" data-ts="2">Plank</span>
+            <span class="timestamp-chip" data-ts="3">Good Morning</span>
           </div>
         </div>
         <div class="demo-meta">
-          <span class="demo-exercise-name" id="demo-exercise-name">Jumping Jacks</span>
-          <span class="demo-gt-badge">GT: <span id="demo-gt">35</span> reps</span>
+          <span class="demo-exercise-name" id="demo-exercise-name">Alternating Side Crunch</span>
+          <span class="demo-gt-badge">GT: <span id="demo-gt">14</span> reps</span>
         </div>
       </div>
 
@@ -874,70 +877,74 @@
 
 <!-- Interactive Demo JavaScript -->
 <script>
-  // Demo data - replace video paths and timestamps when MP4s are available
+  // Demo data with real benchmark results from AdvancedCountBench (all models @ 5fps)
   const demoData = [
     {
       id: 0,
-      name: "Jumping Jacks",
-      timestamp: "0:15",
-      startTime: 15, // seconds into video
-      video: "./static/videos/demo.mp4",
-      groundTruth: 35,
+      name: "Alternating Side Crunch",
+      timestamp: "Video 1",
+      video: "./static/videos/alternating_side_crunch.mp4",
+      groundTruth: 14,
       predictions: {
-        "Gemini 3 Flash": 34,
-        "Gemini 2.5 Pro": 31,
-        "GPT-5": 10,
-        "Claude 4.5": 12,
-        "Qwen3-4B": 10,
-        "Qwen3-32B": 15
+        "Gemini 3 Flash": 15,
+        "Gemini 2.5 Pro": 14,
+        "GPT-5": 8,
+        "Claude Sonnet 4.5": 20,
+        "Claude Opus 4.5": 24,
+        "LLaMA 4 Maverick": 20,
+        "Qwen3-VL-4B": 0,
+        "Qwen3-VL-8B": 93
       }
     },
     {
       id: 1,
-      name: "Mountain Climbers",
-      timestamp: "0:45",
-      startTime: 45,
-      video: "./static/videos/demo.mp4",
-      groundTruth: 28,
+      name: "3-Point Knee Tap",
+      timestamp: "Video 2",
+      video: "./static/videos/knee_tap.mp4",
+      groundTruth: 9,
       predictions: {
-        "Gemini 3 Flash": 27,
-        "Gemini 2.5 Pro": 24,
-        "GPT-5": 10,
-        "Claude 4.5": 10,
-        "Qwen3-4B": 10,
-        "Qwen3-32B": 18
+        "Gemini 3 Flash": 8,
+        "Gemini 2.5 Pro": 8,
+        "GPT-5": 8,
+        "Claude Sonnet 4.5": 10,
+        "Claude Opus 4.5": 10,
+        "LLaMA 4 Maverick": 14,
+        "Qwen3-VL-4B": 100,
+        "Qwen3-VL-8B": 8
       }
     },
     {
       id: 2,
-      name: "Squats",
-      timestamp: "1:15",
-      startTime: 75,
-      video: "./static/videos/demo.mp4",
-      groundTruth: 15,
+      name: "Up & Down Plank",
+      timestamp: "Video 3",
+      video: "./static/videos/up_down_plank.mp4",
+      groundTruth: 10,
       predictions: {
-        "Gemini 3 Flash": 15,
-        "Gemini 2.5 Pro": 14,
-        "GPT-5": 12,
-        "Claude 4.5": 10,
-        "Qwen3-4B": 10,
-        "Qwen3-32B": 12
+        "Gemini 3 Flash": 10,
+        "Gemini 2.5 Pro": 10,
+        "GPT-5": 18,
+        "Claude Sonnet 4.5": 15,
+        "Claude Opus 4.5": 14,
+        "LLaMA 4 Maverick": 16,
+        "Qwen3-VL-4B": 100,
+        "Qwen3-VL-8B": 10
       }
     },
     {
       id: 3,
-      name: "Bicycle Crunches",
-      timestamp: "1:45",
-      startTime: 105,
-      video: "./static/videos/demo.mp4",
-      groundTruth: 24,
+      name: "Good Morning + Twist",
+      timestamp: "Video 4",
+      video: "./static/videos/good_morning_twist.mp4",
+      groundTruth: 10,
       predictions: {
-        "Gemini 3 Flash": 23,
-        "Gemini 2.5 Pro": 20,
-        "GPT-5": 10,
-        "Claude 4.5": 8,
-        "Qwen3-4B": 10,
-        "Qwen3-32B": 10
+        "Gemini 3 Flash": 10,
+        "Gemini 2.5 Pro": 10,
+        "GPT-5": 19,
+        "Claude Sonnet 4.5": 10,
+        "Claude Opus 4.5": 13,
+        "LLaMA 4 Maverick": 16,
+        "Qwen3-VL-4B": 10,
+        "Qwen3-VL-8B": 95
       }
     }
   ];
@@ -982,19 +989,16 @@
     document.getElementById('demo-exercise-name').textContent = demo.name;
     document.getElementById('demo-gt').textContent = demo.groundTruth;
 
-    // Update video - when you have MP4, uncomment below
+    // Update video with actual MP4
     const videoContainer = document.getElementById('demo-video-container');
-    // videoContainer.innerHTML = `
-    //   <video class="demo-video" id="demo-video" controls muted loop>
-    //     <source src="${demo.video}" type="video/mp4">
-    //   </video>
-    // `;
-    // const video = document.getElementById('demo-video');
-    // video.currentTime = demo.startTime;
-    // video.play();
-
-    // Placeholder for now
-    videoContainer.innerHTML = `<i class="fas fa-play-circle" style="font-size: 2.5rem;"></i>`;
+    videoContainer.innerHTML = `
+      <video class="demo-video" id="demo-video" controls muted loop autoplay playsinline>
+        <source src="${demo.video}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    `;
+    const video = document.getElementById('demo-video');
+    video.play().catch(e => console.log('Autoplay prevented:', e));
 
     // Update predictions
     renderPredictions(demo);
