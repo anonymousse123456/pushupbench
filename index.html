@@ -852,13 +852,45 @@
 
 <div class="section-divider"></div>
 
+<!-- Evaluation with lmms-eval -->
+<section class="section" id="evaluation">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">Evaluate with lmms-eval</h2>
+    <p>PushupBench is integrated into <a href="https://github.com/EvolvingLMMs-Lab/lmms-eval" target="_blank">lmms-eval</a> (<a href="https://github.com/EvolvingLMMs-Lab/lmms-eval/pull/1262" target="_blank">PR #1262</a>). You can evaluate any supported VLM with a single command.</p>
+
+    <h3 class="title is-5" style="margin-top: 1.5rem;">Installation</h3>
+    <pre><code>pip install lmms-eval</code></pre>
+
+    <h3 class="title is-5" style="margin-top: 1.5rem;">Run Evaluation</h3>
+    <pre><code>python -m lmms_eval \
+    --model qwen2_5_vl \
+    --model_args pretrained=Qwen/Qwen2.5-VL-7B-Instruct \
+    --tasks pushupbench \
+    --batch_size 1 \
+    --log_samples \
+    --output_path ./logs/</code></pre>
+
+    <p style="margin-top: 1rem;">The task reports four metrics:</p>
+    <ul>
+      <li><strong>exact_match</strong> — prediction matches any acceptable ground-truth count (%)</li>
+      <li><strong>obo</strong> — off-by-one accuracy, prediction within ±1 of ground truth (%)</li>
+      <li><strong>mae</strong> — mean absolute error (lower is better)</li>
+      <li><strong>r_squared</strong> — R² coefficient of determination (outliers with |error|&gt;50 excluded)</li>
+    </ul>
+
+    <p style="margin-top: 1rem;">Videos are automatically downloaded from HuggingFace on first run (requires a HF token set via <code>HF_TOKEN</code> env var or <code>huggingface-cli login</code>).</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- BibTeX -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{anonymous2025pushupbench,
+    <pre><code>@inproceedings{li2025pushupbench,
   title     = {Your VLM is Not Good at Counting Pushups},
-  author    = {Anonymous},
+  author    = {Li, Shengzhi and Chen, Jiarun and Sharma, Karun and Su, Jiaqi and Pei, Shichao},
   booktitle = {ACL},
   year      = {2025},
 }</code></pre>
